@@ -14,5 +14,14 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return "test ".$router->app->version();
+});
+
+$router->get('/posts/{postId}/comments/{commentId}', function ($postId, $commentId) {
+    return "postId = ".$postId."<br/>commentId = ".$commentId;
+});
+
+$router->get('/user[/{name}]', function ($name = null) {
+    if ($name == null) return "you are null";
+    return "you are ".$name;
 });
