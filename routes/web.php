@@ -14,7 +14,9 @@
 */
 
 $router->get('/', function () use ($router) {
-    return "test ".$router->app->version();
+    //$appname = env('APP_NAME');
+    $appname = config('namesome.appname');
+    return $appname."<br/>".str_repeat("=", strlen($appname))."<br/>using ".$router->app->version();
 });
 
 $router->get('/posts/{postId}/comments/{commentId}', function ($postId, $commentId) {

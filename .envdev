@@ -1,4 +1,4 @@
-APP_NAME=name-some-backend-php
+APP_NAME=namesome
 APP_ENV=local
 APP_KEY=base64:wmlr/xWqHg5m+56oHbSwU3eCWp+Pgll+Bx/hFBdC3Gw=
 APP_DEBUG=true
