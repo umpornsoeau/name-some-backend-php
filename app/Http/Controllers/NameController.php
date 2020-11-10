@@ -5,12 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use App\Models\Word;
 
 class NameController extends Controller
 {
 
     public function random($amount = 10)
     {
+        $words = App\Models\Word::all();
+
+        foreach ($words as $word) {
+            echo $word->group_name;
+        }
+        return response()->json(['code' => '200', 'data' => $words]);
+/*
         $results = app('db')->select("select * from pg_tables where schemaname='public'");
 
         echo implode("<br/>", $results);
@@ -18,6 +26,7 @@ class NameController extends Controller
         if ($amount < 1) return response()->json(['code' => '400']);
         if ($amount > 100) return response()->json(['code' => '403']);
         return response()->json(['code' => '200', 'data' => $amount]);
+*/
     }
 
     public function createtable()

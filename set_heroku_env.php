@@ -30,11 +30,6 @@ $WEBURL = trim(substr($info, $matches[0][1] + 8));
 $WEBURL = rtrim($WEBURL,"/");
 //echo "'".$WEBURL."'";
 
-$DATABASE_URL = `heroku config:get DATABASE_URL`;
-echo $DATABASE_URL;
-
-$dbopts = parse_url($DATABASE_URL);
-print_r($dbopts);
 
 $output = `heroku config:set APP_NAME=namesome`;
 $output = `heroku config:set APP_ENV=production`;
@@ -44,6 +39,18 @@ $output = `heroku config:set APP_URL=$WEBURL`;
 $output = `heroku config:set APP_TIMEZONE=Asia/Bangkok`;
 $output = `heroku config:set LOG_CHANNEL=stack`;
 $output = `heroku config:set LOG_SLACK_WEBHOOK_URL=`;
+$output = `heroku config:set CACHE_DRIVER=file`;
+$output = `heroku config:set QUEUE_CONNECTION=sync`;
+
+
+// This config env for using heroku postgresql
+/*
+$DATABASE_URL = `heroku config:get DATABASE_URL`;
+echo $DATABASE_URL;
+
+$dbopts = parse_url($DATABASE_URL);
+print_r($dbopts);
+
 $output = `heroku config:set DB_CONNECTION=pgsql`;
 $host = $dbopts['host'];
 $port = $dbopts['port'];
@@ -55,9 +62,28 @@ $output = `heroku config:set DB_PORT=$port`;
 $output = `heroku config:set DB_DATABASE=$db`;
 $output = `heroku config:set DB_USERNAME=$user`;
 $output = `heroku config:set DB_PASSWORD=$pass`;
-$output = `heroku config:set CACHE_DRIVER=file`;
-$output = `heroku config:set QUEUE_CONNECTION=sync`;
+ */
 
+
+// This config env for using mysql from clever-cloud add-on
+// First, need to copy Connection URI from clever-cloud dashboard and save it in local .env as DATABASE_URL
+$DATABASE_URL = $_ENV['DATABASE_URL'];
+echo $DATABASE_URL;
+
+$dbopts = parse_url($DATABASE_URL);
+print_r($dbopts);
+
+$output = `heroku config:set DB_CONNECTION=mysql`;
+$host = $dbopts['host'];
+$port = $dbopts['port'];
+$db = substr($dbopts['path'], 1);
+$user = $dbopts['user'];
+$pass = $dbopts['pass'];
+$output = `heroku config:set DB_HOST=$host`;
+$output = `heroku config:set DB_PORT=$port`;
+$output = `heroku config:set DB_DATABASE=$db`;
+$output = `heroku config:set DB_USERNAME=$user`;
+$output = `heroku config:set DB_PASSWORD=$pass`;
 
 ?>
 

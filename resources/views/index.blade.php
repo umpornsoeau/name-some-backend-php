@@ -15,12 +15,14 @@
     <h3>A <strong>NameSome-Backend</strong> with PHP + Laravel/Lumen</h3>
 </div>
 <nav class="tabs is-center">
-    <a href="#features">features</a>
-    <a href="#start">start</a>
-    <a href="#docs">docs</a>
-    <a href="https://github.com/jenil/chota">GitHub</a>
+    <a href="#features">random some names</a>
+    <a href="https://github.com/umpornsoeau/name-some-backend-php" target="_blank">GitHub</a>
 </nav>
 </div>
+
+<script>
+
+</script>
 </body>
 </html>
 
