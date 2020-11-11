@@ -5,18 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use App\Models\Word;
 
 class NameController extends Controller
 {
 
     public function random($amount = 10)
     {
-        $words = App\Models\Word::all();
+        $words = \App\Models\Word::all();
 
-        foreach ($words as $word) {
-            echo $word->group_name;
-        }
         return response()->json(['code' => '200', 'data' => $words]);
 /*
         $results = app('db')->select("select * from pg_tables where schemaname='public'");
@@ -74,6 +70,29 @@ class NameController extends Controller
 
     public function insertsample()
     {
+
+        $data = array(
+                    array('group_name' => 'color', 'word' => 'ablaze'),
+                    array('group_name' => 'color', 'word' => 'beaming'),
+                    array('group_name' => 'color', 'word' => 'bold'),
+                    array('group_name' => 'color', 'word' => 'bright'),
+                    array('group_name' => 'color', 'word' => 'vibrant'),
+                    array('group_name' => 'adjective', 'word' => 'axiomatic'),
+                    array('group_name' => 'adjective', 'word' => 'acidic'),
+                    array('group_name' => 'adjective', 'word' => 'ambiguous'),
+                    array('group_name' => 'adjective', 'word' => 'aquatic'),
+                    array('group_name' => 'adjective', 'word' => 'auspicious'),
+                );
+        foreach ($data as $words) {
+            $word = new \App\Models\Word;
+            $word->group_name = $words['group_name'];
+            $word->word = $words['word'];
+            $word->save();
+        }
+
+        echo "Done";
+
+/*
         DB::table('words')->insert(array(
             array('group_name' => 'color', 'word' => 'ablaze'),
             array('group_name' => 'color', 'word' => 'beaming'),
@@ -89,6 +108,8 @@ class NameController extends Controller
             array('group_name' => 'color', 'word' => 'vibrant')
         );
         echo "Last ID is $id";
+*/
+
     }
 }
 
